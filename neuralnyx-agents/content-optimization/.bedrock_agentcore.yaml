@@ -1,0 +1,30 @@
+default_agent: content_optimize
+agents:
+  content_optimize:
+    name: content_optimize
+    entrypoint: content_optimize.py
+    platform: linux/arm64
+    container_runtime: docker
+    aws:
+      execution_role: arn:aws:iam::309645991361:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-b67aa062e1
+      execution_role_auto_create: false
+      account: '309645991361'
+      region: us-east-1
+      ecr_repository: 309645991361.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-content_optimize
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: content_optimize-IUCiO7AjJn
+      agent_arn: arn:aws:bedrock-agentcore:us-east-1:309645991361:runtime/content_optimize-IUCiO7AjJn
+      agent_session_id: null
+    codebuild:
+      project_name: bedrock-agentcore-content_optimize-builder
+      execution_role: arn:aws:iam::309645991361:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-b67aa062e1
+      source_bucket: bedrock-agentcore-codebuild-sources-309645991361-us-east-1
+    authorizer_configuration: null
+    oauth_configuration: null

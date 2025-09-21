@@ -1,0 +1,815 @@
+digraph "Diagram" {
+  splines = "ortho";
+  pad = 1;
+  nodesep = 0.6;
+  ranksep = 0.75;
+  fontname = "Sans-Serif";
+  fontsize = 15;
+  dpi = 200;
+  rankdir = "BT";
+  compound = true;
+  fontcolor = "#222222";
+  edge [
+    color = "#D5871488";
+    penwidth = 2;
+    arrowhead = "dot";
+    arrowtail = "dot";
+  ];
+  node [
+    shape = "box";
+    style = "rounded";
+    fixedsize = true;
+    width = 1.7;
+    height = 1.7;
+    labelloc = "c";
+    imagescale = true;
+    fontname = "Sans-Serif";
+    fontsize = 8;
+    margin = 8;
+  ];
+  subgraph "NeuralynxBackendStack" {
+    subgraph "cluster-SubGraph.NeuralynxBackendStack" {
+      graph [
+        label = "NeuralynxBackendStack";
+        labelloc = "b";
+        labeljust = "l";
+        margin = 10;
+        fontsize = 16;
+        penwidth = 2;
+        pencolor = "#888888";
+        style = "filled,rounded";
+        fillcolor = "#e4e4e4";
+      ];
+      "NeuralynxBackendStack/CrawlResultsBucketName" [
+        label = "\nCrawlResultsBucketNam";
+        fontsize = 12;
+        image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+        imagescale = "true";
+        imagepos = "tc";
+        penwidth = 0;
+        shape = "node";
+        fixedsize = "true";
+        labelloc = "b";
+        width = 2;
+        height = 2.4819999999999998;
+      ];
+      "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+        label = " CrawlResultsBucket";
+        fontsize = 12;
+        image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Storage/64/Arch_Amazon-S3-Standard_64@5x.png";
+        imagescale = "true";
+        imagepos = "tc";
+        penwidth = 0;
+        shape = "node";
+        fixedsize = "true";
+        labelloc = "b";
+        width = 2;
+        height = 2.266;
+      ];
+      subgraph "cluster-SubGraph.Cognito" {
+        graph [
+          label = "Cognito";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/Cognito/PreSignUpTrigger" [
+          label = " PreSignUpTrigger";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Cognito/UserPool" [
+          label = " UserPool";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_Amazon-Cognito_64.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Cognito/UserPoolClient" [
+          label = " UserPoolClient";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_Amazon-Cognito_64.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Cognito/UserPoolIdParam" [
+          label = " UserPoolIdParam";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Cognito/UserPoolClientIdParam" [
+          label = "\nUserPoolClientIdParam";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/Cognito/EnvironmentParam" [
+          label = " EnvironmentParam";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Cognito/RegionParam" [
+          label = " RegionParam";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Cognito/CognitoIssuerParam" [
+          label = " CognitoIssuerParam";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Management-Governance/Res_48_Dark/Res_AWS-Systems-Manager_Parameter-Store_48_Dark.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+      }
+      subgraph "cluster-SubGraph.SNS" {
+        graph [
+          label = "SNS";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/SNS/DomainEventsDLQ" [
+          label = " DomainEventsDLQ";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Simple-Queue-Service_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+          label = " DomainEventsTopic";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Simple-Notification-Service_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+      }
+      subgraph "cluster-SubGraph.Lambda" {
+        graph [
+          label = "Lambda";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/Lambda/SignupHandler" [
+          label = " SignupHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/LoginHandler" [
+          label = " LoginHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/RefreshHandler" [
+          label = " RefreshHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/DomainsHandler" [
+          label = " DomainsHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/TopicsHandler" [
+          label = " TopicsHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/HealthHandler" [
+          label = " HealthHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/Authorizer" [
+          label = " Authorizer";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/DomainStreamHandler" [
+          label = " DomainStreamHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/Lambda/SitemapCrawlerHandler" [
+          label = "\nSitemapCrawlerHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" [
+          label = "\nSitemapCrawlerApiHand";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" [
+          label = "\nKeywordGeneratorApiHa";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/Lambda/BedrockAgentHandler" [
+          label = " BedrockAgentHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+      }
+      subgraph "cluster-SubGraph.ContainerLambda" {
+        graph [
+          label = "ContainerLambda";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/ContainerLambda/DomainCrawlerHandler" [
+          label = " DomainCrawlerHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/ContainerLambda/DomainCrawlerApiHandler" [
+          label = "\nDomainCrawlerApiHandl";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" [
+          label = " LighthouseHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/ContainerLambda/ContentHandler" [
+          label = " ContentHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+      }
+      subgraph "cluster-SubGraph.Database" {
+        graph [
+          label = "Database";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/Database/Domain" [
+          label = " Domain";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Database/DomainStreamEventSource" [
+          label = "\nDomainStreamEventSour";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.4819999999999998;
+        ];
+        "NeuralynxBackendStack/Database/Content" [
+          label = " Content";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Database/TopicsTable" [
+          label = " TopicsTable";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Database/Keywords" [
+          label = " Keywords";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/Database/ErrorLogs" [
+          label = " ErrorLogs";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+      }
+      subgraph "cluster-SubGraph.API" {
+        graph [
+          label = "API";
+          labelloc = "b";
+          labeljust = "l";
+          margin = 10;
+          fontsize = 16;
+          penwidth = 2;
+          pencolor = "#888888";
+          style = "filled,rounded";
+          fillcolor = "#d6d6d6";
+        ];
+        "NeuralynxBackendStack/API/ReadAPI" [
+          label = " ReadAPI";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.466;
+        ];
+        "NeuralynxBackendStack/API/RequestAuthorizer" [
+          label = " ApiGateway\nAuthorizer\nRequestAuthorizer";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 1.2;
+          height = 1.898;
+        ];
+        "NeuralynxBackendStack/API/SwaggerUIHandler" [
+          label = " SwaggerUIHandler";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+        "NeuralynxBackendStack/API/SwaggerGenerator" [
+          label = " SwaggerGenerator";
+          fontsize = 12;
+          image = "/Users/blaise/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png";
+          imagescale = "true";
+          imagepos = "tc";
+          penwidth = 0;
+          shape = "node";
+          fixedsize = "true";
+          labelloc = "b";
+          width = 2;
+          height = 2.266;
+        ];
+      }
+    }
+  }
+  "NeuralynxBackendStack/Cognito/UserPool" -> "NeuralynxBackendStack/Cognito/PreSignUpTrigger" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Cognito/UserPoolClient" -> "NeuralynxBackendStack/Cognito/UserPool" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Cognito/UserPoolIdParam" -> "NeuralynxBackendStack/Cognito/UserPool" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Cognito/UserPoolClientIdParam" -> "NeuralynxBackendStack/Cognito/UserPoolClient" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Cognito/CognitoIssuerParam" -> "NeuralynxBackendStack/Cognito/UserPool" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/SNS/DomainEventsDLQ" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SignupHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/LoginHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/RefreshHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/DomainsHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/DomainsHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/DomainsHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/TopicsHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/TopicsHandler" -> "NeuralynxBackendStack/Database/TopicsTable" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/HealthHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/Authorizer" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/DomainStreamHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/DomainStreamHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerHandler" -> "NeuralynxBackendStack/SNS/DomainEventsDLQ" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" -> "NeuralynxBackendStack/Database/Content" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" -> "NeuralynxBackendStack/SNS/DomainEventsDLQ" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" -> "NeuralynxBackendStack/Database/TopicsTable" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" -> "NeuralynxBackendStack/Database/Keywords" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" -> "NeuralynxBackendStack/Database/ErrorLogs" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Lambda/BedrockAgentHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerHandler" -> "NeuralynxBackendStack/SNS/DomainEventsDLQ" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerApiHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerApiHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/DomainCrawlerApiHandler" -> "NeuralynxBackendStack/Database/Content" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" -> "NeuralynxBackendStack/SNS/DomainEventsTopic" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" -> "NeuralynxBackendStack/SNS/DomainEventsDLQ" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/ContentHandler" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/ContentHandler" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/ContainerLambda/ContentHandler" -> "NeuralynxBackendStack/Database/Content" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Database/DomainStreamEventSource" -> "NeuralynxBackendStack/Lambda/DomainStreamHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/Database/DomainStreamEventSource" -> "NeuralynxBackendStack/Database/Domain" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/CrawlResultsBucketName" -> "NeuralynxBackendStack/S3/CrawlResultsBucket" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/SignupHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/LoginHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/RefreshHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/DomainsHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/API/RequestAuthorizer" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/SitemapCrawlerApiHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/ContainerLambda/LighthouseHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/ContainerLambda/ContentHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/TopicsHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/KeywordGeneratorApiHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/BedrockAgentHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/Lambda/HealthHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/API/SwaggerUIHandler" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/ReadAPI" -> "NeuralynxBackendStack/API/SwaggerGenerator" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/RequestAuthorizer" -> "NeuralynxBackendStack/Lambda/Authorizer" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/RequestAuthorizer" -> "NeuralynxBackendStack/API/ReadAPI" [
+    dir = "both";
+  ];
+  "NeuralynxBackendStack/API/SwaggerUIHandler" -> "NeuralynxBackendStack/API/ReadAPI" [
+    dir = "both";
+  ];
+}

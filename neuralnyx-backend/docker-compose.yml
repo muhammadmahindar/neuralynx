@@ -1,0 +1,34 @@
+services:
+  localstack:
+    image: localstack/localstack-pro:latest
+    container_name: localstack-main
+    ports:
+      - '4566:4566' # Edge
+      - '4510-4559:4510-4559' # Pro services
+    environment:
+      # Core / commonly-needed services for CDK stacks
+      - SERVICES=cognito-idp,cognito-identity,sts,iam,cloudformation,cloudwatch,logs,ssm,s3,lambda,apigateway,apigatewayv2,dynamodb,ecr,events,sns,sqs,bedrock,bedrock-runtime
+      - DEBUG=1
+      - AWS_DEFAULT_REGION=ap-southeast-1
+      - AWS_REGION=ap-southeast-1
+      - LOCALSTACK_AUTH_TOKEN="test"
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      # Bedrock configuration
+      - BEDROCK_PREWARM=1
+      - DEFAULT_BEDROCK_MODEL=llama3.2:1b
+      - BEDROCK_PULL_MODELS=llama3.2:1b
+      - BEDROCK_MODEL_CACHE_SIZE=1 # Keep model in memory
+      - BEDROCK_MODEL_TIMEOUT=300
+        # Lambda + Apple Silicon niceties
+      - LAMBDA_IGNORE_ARCHITECTURE=1
+      - LAMBDA_EXECUTOR=docker
+      - LAMBDA_RUNTIME_ENVIRONMENT_TIMEOUT=120
+      # Mount temp so lambdas can access the host tmp (helps with large asset zips)
+      # (Optional) speed up boot / avoid web UI
+      - START_WEB=0
+      # Docker
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - './.localstack:/var/lib/localstack'

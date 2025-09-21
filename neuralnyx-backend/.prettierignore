@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+cdk.out/
+dist/
+build/
+*.js
+*.d.ts
+
+# CDK files
+cdk.context.json
+.cdk.staging/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Package files
+*.tgz
+*.tar.gz
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+
+# Serverless
+.serverless/
+
+# Local development
+.localstack/

@@ -1,0 +1,187 @@
+# Use Ubuntu base image with Chrome support
+FROM --platform=linux/amd64 ubuntu:22.04
+
+# Install Node.js 20 and build dependencies
+RUN apt-get update && \
+    apt-get install -y curl build-essential cmake autotools-dev autoconf automake libtool && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Playwright dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libc6 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libexpat1 \
+    libfontconfig1 \
+    libgbm1 \
+    libgcc1 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    lsb-release \
+    xdg-utils && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /var/task
+
+# Install AWS Lambda Runtime Interface Client
+RUN npm install -g aws-lambda-ric
+
+# Verify npx installation and location
+RUN which npx && npx --version
+
+# Verify aws-lambda-ric installation
+RUN which aws-lambda-ric || echo "aws-lambda-ric not found in PATH"
+RUN ls -la /usr/local/lib/node_modules/aws-lambda-ric/ || echo "aws-lambda-ric not found in node_modules"
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install Node.js dependencies (including dev dependencies for lighthouse and playwright)
+RUN npm ci
+
+# Install Playwright browsers with proper environment
+ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright-browsers
+RUN mkdir -p /opt/playwright-browsers
+RUN npx playwright install chromium --with-deps
+RUN npx playwright install-deps chromium
+
+# Verify that lighthouse and playwright are installed
+RUN npm list lighthouse playwright
+
+# Verify Playwright installation
+RUN npx playwright --version
+RUN ls -la /opt/playwright-browsers/ || echo "Playwright browsers directory not found"
+RUN find /opt/playwright-browsers -name "*chromium*" -type d || echo "Chromium not found"
+
+# Copy source files (TypeScript)
+COPY lambda/ ./lambda/
+COPY models/ ./models/
+COPY tsconfig.json ./
+
+# Build TypeScript with proper module resolution
+RUN echo "Building TypeScript with proper module resolution..." && \
+    npx tsc --project tsconfig.json && \
+    echo "TypeScript build completed successfully"
+
+# Verify the build output
+RUN echo "Build output structure:" && \
+    ls -la dist/ && \
+    echo "Lambda services:" && \
+    ls -la dist/lambda/services/ && \
+    echo "Models:" && \
+    ls -la dist/models/ && \
+    echo "Testing compiled imports:" && \
+    node -e "try { require('./dist/lambda/services/domainService'); console.log('domainService loads successfully'); } catch(e) { console.log('domainService error:', e.message); }" && \
+    node -e "try { require('./dist/lambda/services/contentService'); console.log('contentService loads successfully'); } catch(e) { console.log('contentService error:', e.message); }"
+
+# Copy built files to the correct structure for Lambda
+RUN mkdir -p ./services && \
+    cp -r dist/lambda/services/* ./services/ && \
+    cp -r dist/models ./services/ && \
+    cp dist/lambda/domainCrawlerHandler.js ./ && \
+    cp dist/lambda/lighthouseHandler.js ./ && \
+    cp dist/lambda/contentHandler.js ./ && \
+    cp -r dist/lambda/utils ./utils/ && \
+    echo "Files copied to Lambda structure successfully"
+
+# Fix import paths in the compiled JavaScript files for container environment
+RUN echo "Fixing import paths for container environment..." && \
+    sed -i 's|require("../../models/|require("./models/|g' ./services/*.js && \
+    echo "Import paths fixed successfully"
+
+# Verify the fix worked
+RUN echo "Verifying structure:" && \
+    ls -la ./services/ && \
+    ls -la ./services/models/ && \
+    echo "Testing if services can find models:" && \
+    node -e "console.log('Testing domainService...'); try { require('./services/domainService'); console.log('✅ domainService loaded'); } catch(e) { console.log('❌ domainService error:', e.message); }" && \
+    node -e "console.log('Testing contentService...'); try { require('./services/contentService'); console.log('✅ contentService loaded'); } catch(e) { console.log('❌ contentService error:', e.message); }"
+
+# Verify final structure
+RUN echo "Final Lambda structure:" && \
+    ls -la && \
+    echo "Services directory:" && \
+    ls -la ./services/ && \
+    echo "Models in services:" && \
+    ls -la ./services/models/ && \
+    echo "Testing final imports:" && \
+    node -e "try { require('./services/domainService'); console.log('domainService loads from final structure'); } catch(e) { console.log('domainService final error:', e.message); }" && \
+    node -e "try { require('./services/contentService'); console.log('contentService loads from final structure'); } catch(e) { console.log('contentService final error:', e.message); }"
+
+# Install aws-lambda-ric and other required packages
+RUN npm install aws-lambda-ric
+
+# Clean up build artifacts
+RUN rm -rf dist lambda models tsconfig.json
+
+# Create a clean router to handle all handlers
+RUN echo 'let domainCrawlerHandler;' > index.js && \
+    echo 'let lighthouseHandler;' >> index.js && \
+    echo 'let contentHandler;' >> index.js && \
+    echo 'try {' >> index.js && \
+    echo '  domainCrawlerHandler = require("./domainCrawlerHandler").handler;' >> index.js && \
+    echo '  console.log("✅ Domain crawler handler loaded successfully");' >> index.js && \
+    echo '} catch (e) { console.log("❌ Error loading domain crawler:", e.message); }' >> index.js && \
+    echo 'try {' >> index.js && \
+    echo '  lighthouseHandler = require("./lighthouseHandler").handler;' >> index.js && \
+    echo '  console.log("✅ Lighthouse handler loaded successfully");' >> index.js && \
+    echo '} catch (e) { console.log("❌ Error loading lighthouse handler:", e.message); }' >> index.js && \
+    echo 'try {' >> index.js && \
+    echo '  contentHandler = require("./contentHandler").handler;' >> index.js && \
+    echo '  console.log("✅ Content handler loaded successfully");' >> index.js && \
+    echo '} catch (e) { console.log("❌ Error loading content handler:", e.message); }' >> index.js && \
+    echo 'exports.handler = async (event, context) => {' >> index.js && \
+    echo '  const functionName = context.functionName;' >> index.js && \
+    echo '  console.log("🚀 Function name:", functionName);' >> index.js && \
+    echo '  if (functionName.includes("DomainCrawler") || functionName.includes("DomainCra")) {' >> index.js && \
+    echo '    if (!domainCrawlerHandler) throw new Error("Domain crawler handler not loaded");' >> index.js && \
+    echo '    return domainCrawlerHandler(event, context);' >> index.js && \
+    echo '  } else if (functionName.includes("Lighthouse") || functionName.includes("Lighthous")) {' >> index.js && \
+    echo '    if (!lighthouseHandler) throw new Error("Lighthouse handler not loaded");' >> index.js && \
+    echo '    return lighthouseHandler(event, context);' >> index.js && \
+    echo '  } else if (functionName.includes("Content") || functionName.includes("ContentHandler")) {' >> index.js && \
+    echo '    if (!contentHandler) throw new Error("Content handler not loaded");' >> index.js && \
+    echo '    return contentHandler(event, context);' >> index.js && \
+    echo '  }' >> index.js && \
+    echo '  throw new Error(`Unknown function: ${functionName}`);' >> index.js && \
+    echo '};' >> index.js
+
+# Set execute permissions
+RUN chmod +x index.js
+
+# Set the CMD to use Lambda runtime interface client
+# Use the full path to npx that we verified above
+CMD ["/usr/bin/npx", "aws-lambda-ric", "index.handler"]

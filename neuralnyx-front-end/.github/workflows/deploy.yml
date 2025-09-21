@@ -1,0 +1,61 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14
+          cache: "npm"
+          cache-dependency-path: |
+            website/package-lock.json
+            cdk/package-lock.json
+
+      - name: Install website dependencies
+        working-directory: ./website
+        run: npm ci
+
+      - name: Build website
+        working-directory: ./website
+        env:
+          VITE_PUBLIC_API_URL: ${{ secrets.VITE_PUBLIC_API_URL }}
+        run: npm run build
+
+      - name: Install CDK dependencies
+        working-directory: ./cdk
+        run: npm ci
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Bootstrap CDK (if needed)
+        working-directory: ./cdk
+        run: |
+          npx cdk bootstrap --require-approval never || echo "Bootstrap already exists or failed"
+
+      - name: Deploy with CDK
+        working-directory: ./cdk
+        env:
+          CDK_DEFAULT_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
+          CDK_DEFAULT_REGION: ${{ vars.AWS_REGION }}
+        run: |
+          npm run build
+          npx cdk deploy --require-approval never
